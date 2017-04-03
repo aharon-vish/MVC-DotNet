@@ -1,0 +1,77 @@
+﻿@model IEnumerable<WebApplication1.Models.GiftCard>
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+
+
+<div class="container" style="background-color:whitesmoke;border-radius: 15px;">
+    <div style="text-align:center">
+        <h2><strong style="color:red">Gift</strong>BOX</h2>
+        <hr>
+
+    </div>
+    <div style ="text-align:center">
+        <input id="switchInOutGift" value="1" type="checkbox" checked data-toggle="toggle" data-on="Out" data-off="In" data-onstyle="success" data-offstyle="danger">
+    </div>
+    <br />
+    <div id="listOfGift">
+        <table class="table">
+            <tr>
+                <th style="text-align:center">
+                    <b style="color:seagreen">To Who</b>
+                </th>
+                <th style="text-align:center">
+                    <b style="color:seagreen">Store</b>
+                </th>
+                <th style="text-align:center">
+                    <b style="color:seagreen">Credit</b>
+                </th>
+                <th style="text-align:center">
+                    <b style="color:seagreen">Expiration date</b>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr class="details">
+                    <td style="text-align:center">
+                        <b>@Html.DisplayFor(modelItem => item.FirstName) </b> <b>@Html.DisplayFor(modelItem => item.LastName) </b>
+                    </td>
+
+                    <td style="text-align:center">
+                        <b>@Html.DisplayFor(modelItem => item.StoreName)</b>
+                    </td>
+                    <td style="text-align:center">
+                        <b>@Html.DisplayFor(modelItem => item.Credit)</b>
+                    </td>
+                    <td style="text-align:center">
+                        <b>@Html.DisplayFor(modelItem => item.GiftCardValid)</b>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+     
+</div>
+    @Ajax.ActionLink("ToMe", "FromMe", null, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "listOfGift", InsertionMode = InsertionMode.Replace }, new { @id = "_fromMebtn", @style="display:none" })
+     @Ajax.ActionLink("ToMe", "ToMe", null, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "listOfGift", InsertionMode = InsertionMode.Replace }, new { @id = "_toMebtn", @style = "display:none" })
+<script>
+    $(':checkbox').change(function () {
+        if ($('#switchInOutGift:checked').val() !== undefined)
+        {
+            //Gift that i buy                   
+            $('#_fromMebtn')[0].click();
+           
+        }
+        else {
+            //Gift that i  get
+            $('#_toMebtn')[0].click();
+
+        }
+    });
+    
+</script>
+
+

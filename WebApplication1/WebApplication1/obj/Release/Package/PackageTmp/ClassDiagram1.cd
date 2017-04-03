@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="WebApplication1.BundleConfig">
+    <Position X="0.5" Y="0.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\BundleConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.FilterConfig">
+    <Position X="4.75" Y="8" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\FilterConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.EmailService" BaseTypeListCollapsed="true">
+    <Position X="19.5" Y="8.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\IdentityConfig.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WebApplication1.ApplicationSignInManager">
+    <Position X="5.5" Y="0.5" Width="8.25" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\IdentityConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.RouteConfig">
+    <Position X="14.75" Y="8" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\RouteConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Startup">
+    <Position X="0.5" Y="7" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAgAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\Startup.Auth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.MvcApplication">
+    <Position X="16.25" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Controllers.AccountController">
+    <Position X="12" Y="3.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAgAAAAIAAAQAAAAAAAQAAAEAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Controllers.HomeController">
+    <Position X="4" Y="3.25" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAEAAAAAAAQAAAQAAACgQAACAAAAYAQEBAAAgEAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Controllers.TitleController">
+    <Position X="7.25" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\TitleController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.DBCon">
+    <Position X="14.25" Y="9.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAgAAAAAAAAAAAAAEAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>DBContext\DBCon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.GiftCardDBInitializer">
+    <Position X="16.25" Y="0.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DBContext\GiftCardDBInitializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.ForgotViewModel">
+    <Position X="4.5" Y="9.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.LoginViewModel">
+    <Position X="10.25" Y="7.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAgAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.Email">
+    <Position X="21.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Email.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.GiftCard">
+    <Position X="20.25" Y="5.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAABwEAAACAAAAABAAAAABgCABAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Models\GiftCard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.ApplicationUser">
+    <Position X="13.5" Y="6.25" Width="6.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.ApplicationDbContext">
+    <Position X="16" Y="4.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.IndexViewModel">
+    <Position X="0.5" Y="5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAQAAAAAAAAAAAAAAQAAAEAEA=</HashCode>
+      <FileName>Models\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.ManageLoginsViewModel">
+    <Position X="9.5" Y="9.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Models\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.ChangePasswordViewModel">
+    <Position X="0.5" Y="3.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAEAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Models\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.ConfigureTwoFactorViewModel">
+    <Position X="0.5" Y="1.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.Store">
+    <Position X="20.25" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAABAQCAAAAAAAEAA=</HashCode>
+      <FileName>Models\Store.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.User">
+    <Position X="19.5" Y="2.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAEAAACgAAAAAAAAAAAAACAAgAAACAAAAAAAAAAg=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Properties.Resources">
+    <Position X="0.5" Y="8.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAIAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Data.Entity.DropCreateDatabaseIfModelChanges&lt;TContext&gt;" Collapsed="true">
+    <Position X="24.5" Y="2" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Arial" Size="10" />
+</ClassDiagram>

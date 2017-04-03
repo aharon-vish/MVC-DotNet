@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebApplication1.Models.GiftCard>
+<table class="table">
+    <tr>
+        <th style="text-align:center">
+            <b style="color:red">From Who</b>
+        </th>
+        <th style="text-align:center">
+            <b style="color:red">Store</b>
+        </th>
+        <th style="text-align:center">
+            <b style="color:red">Credit</b>
+        </th>
+        <th style="text-align:center">
+            <b style="color:red">Expiration date</b>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="details">
+            <td style="text-align:center">
+                <b>@Html.DisplayFor(modelItem => item.FromWho) </b>
+            </td>
+
+            <td style="text-align:center">
+                <b>@Html.DisplayFor(modelItem => item.StoreName)</b>
+            </td>
+            <td style="text-align:center">
+                <b>@Html.DisplayFor(modelItem => item.Credit)</b>
+            </td>
+            <td style="text-align:center">
+                <b>@Html.DisplayFor(modelItem => item.GiftCardValid)</b>
+            </td>
+        </tr>
+    }
+
+</table>
