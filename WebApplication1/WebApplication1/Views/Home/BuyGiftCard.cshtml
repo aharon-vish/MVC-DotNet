@@ -1,0 +1,250 @@
+﻿@model WebApplication1.Models.GiftCard
+
+<!doctype html>
+<html5>
+    <head>
+        <title></title>
+        <link href="~/Content/loadingStyle.css" rel="stylesheet" />
+        <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+        <link href="~/Content/CreditCard/Style.css" rel="stylesheet" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    </head>
+    <div class="container" style="background-color:whitesmoke;border-radius: 25px;max-width: 1000px;">
+        <h2 id="h2Greeting">Send Your Love </h2>
+        <div class="row text-center" style="text-align: center;">
+            <p style="font-weight:bold">Please chose your greeting:</p>
+            <div>
+                <button type="button" class="btn btn-success" id="btnSketch" data-toggle="tooltip" data-placement="top" title="Click to sketch"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+
+                <button type="button" class="btn btn-info" id="btnRecordVoice" data-toggle="tooltip" data-placement="top" title="Click to record"><span class="glyphicon glyphicon-music" aria-hidden="true"></span></button>
+
+                <button type="button" class="btn btn-warning" id="btnTextGreet" data-toggle="tooltip" data-placement="top" title="Click to write "><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+            </div>
+        </div>
+        <br />
+        <br />
+        @using (Html.BeginForm("upload", "home", FormMethod.Post, new { @class = "form-horizontal", @id = "giftCard", @enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        @Html.EditorFor(g => g.Email, new { htmlAttributes = new {  @placeholder = "Email address", @id = "Email", @class = "form-control", @style = "text-align:center;font-weight: bold;" } })
+                        @Html.ValidationMessageFor(g => g.Email)
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        @Html.EditorFor(g => g.FirstName, new { htmlAttributes = new {@placeholder = "First Name", @id = "FirstName", @class = "form-control", @style = "text-align: center;font-weight: bold;" } })
+                        @Html.ValidationMessageFor(g => g.FirstName)
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        @Html.EditorFor(g => g.LastName, new { htmlAttributes = new { @placeholder = "Last Name", @id = "LastName", @class = "form-control", @style = "text-align: center;font-weight: bold;" } })
+                        @Html.ValidationMessageFor(g => g.LastName)
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        @Html.EditorFor(g => g.Credit, new { htmlAttributes = new { @placeholder = "Credit", @id = "Credit", @class = "form-control", @style = "text-align: center;font-weight: bold;" } })
+                        @Html.ValidationMessageFor(g => g.Credit)
+
+                        @Html.HiddenFor(g => g.GiftCardID, new { htmlAttributes = new { @id = "#GiftCardID" } })
+                        @Html.HiddenFor(g => g.StoreID, new { htmlAttributes = new { @id = "#StoreId" } })
+                    </div>
+
+                    <br />
+                    <div class="col-md-12 file_Btn">
+
+                        <label>
+                            <b>
+                                Click On The <span class="glyphicon glyphicon-heart-empty" style="color:red" for="file_btn">
+                                                 <input id="file_btn" type="file" name="fileUploader" accept="image/*,audio/*" />
+                                </span> To Upload Your Greeting
+                            </b>
+                        </label>
+                        <br>
+                    </div>
+
+                    <input type="hidden"  id="imageDataCard" name="imageDataCard" />
+                </div>
+                <div id="card" class="col-md-8 jumbotron" style="left:-0.5%;background-image:url(@Url.Action("GetImage", "Home", new { id = @ViewData["StoreID"] }))">
+                    <span class="label label-default" id="emailOnCard" style="position:absolute;left:1%;top:80%;"></span>
+                    <br />
+                    <span class="label label-default" id="FullNameOnCard" style="position:absolute;left:1%;top:90%;"></span>
+                    <span class="label label-default" id="CreditOnCard" style="position:absolute;left:50%;top:90%;"></span>
+                    <span class="label label-default" id="ValidOnCard" style="position:absolute;left:1%;top:5%;"></span>
+                    <span class="label label-default" id="GiftCardIDOnCard" style="position:absolute;left:1%;top:12%;"></span>
+                </div>
+            </div>
+            <div class="row " style="text-align: center;padding-bottom:5px">
+                <button class="btn btn-info" type="submit" id="uploadToEmail" style="width:50%">Send</button>
+            </div>
+        }
+    </div>
+    <!--   plugins 	 -->
+    <script src="~/Scripts/js/jquery.bootstrap.wizard.js"></script>
+</html5>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+     
+        var d = new Date();
+        var m = d.getMonth();
+        var y = d.getFullYear();
+       
+        var idGiftCard = ((d.getMilliseconds()) + (d.getSeconds()) + (Math.floor((Math.random() * 1000000))) + (d.getFullYear()) + (Math.floor((Math.random() * 1000000))) + (d.getMonth()));
+        CheckIfNuberIdCardExist();
+
+        function CheckIfNuberIdCardExist() {
+            $.ajax(
+               {
+                   url: '/Home/doesIdCardExist',
+                   type: 'post',
+                   data: { 'idGiftCard': idGiftCard }
+               }, function (data) {
+                   if (data == "true") {
+                       console.log("id do not exist ");
+                       document.getElementById("GiftCardIDOnCard").innerHTML = "Card Number: " + NumCard;
+                   }
+                   else {
+                       console.log("id exist");
+                       idGiftCard = ((d.getMilliseconds()) + (d.getSeconds()) + (Math.floor((Math.random() * 1000000))) + (d.getFullYear()) + (Math.floor((Math.random() * 1000000))) + (d.getMonth()));
+                       CheckIfNuberIdCardExist();
+                   }
+               }
+       );
+            // end ajax
+        }
+       
+        document.getElementById("ValidOnCard").innerHTML = "Valid Card: " + (m) + "/" + (y + 1);
+        document.getElementById("GiftCardIDOnCard").innerHTML = "Card Number: " + idGiftCard;
+        
+        
+        
+        $('#GiftCardID').val(idGiftCard);
+        $("#StoreId").val('@ViewData["StoreID"]');
+  
+    $("#FilUploader").change(function () {
+        var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+            alert("Only '.jpeg','.jpg', '.png', '.gif', '.bmp' formats are allowed.");
+            $('#FilUploadegdf').val('');
+        }
+    });
+    $('#btnSketch').click(function () {
+        var heightCont = ($('html').height() - 100);
+        var widthtCont = ($('header').width());
+
+        window.open("ViewSketch", "", "width=" + (widthtCont - 50) + ",height=" + (heightCont));
+    });
+    $('#btnRecordVoice').click(function () {
+        var heightCont = ($('html').height() - 100);
+        var widthtCont = ($('header').width());
+        window.open("ViewRecVoice", "", "width=" + (widthtCont - 50) + ",height=" + (heightCont));
+    });
+
+
+    $('#btnTextGreet').click(function () {
+        var heightCont = ($('html').height() - 100);
+        var widthtCont = ($('header').width());
+        window.open("ViewTextGreet", "", "width=" + (widthtCont - 50) + ",height=" + (heightCont));
+    });
+    $("#Email").bind("keyup input paste", function () {
+        var Email = $(this).val();
+        $("#emailOnCard").text(Email);
+
+    });
+    $("#FirstName").bind("keyup input paste", function () {
+        var FirstName = $(this).val();
+        var LastName = $("#LastName").val();
+
+        var FullName = FirstName + ' ' + LastName;
+        $("#FullNameOnCard").text(FullName);
+        $("#FullName").val(FullName);
+
+    });
+
+    $("#LastName").bind("keyup input paste", function () {
+        var LastName = $(this).val();
+        var FirstName = $("#FirstName").val();
+
+
+        var FullName = FirstName + ' ' + LastName;
+        $("#FullNameOnCard").text(FullName);
+        $("#FullName").val(FullName);
+
+    });
+    $("#Credit").bind("keyup input paste", function () {
+        var Credit = $(this).val();
+        var creditOnCard = $(this).val();
+
+
+
+        Credit += "$" + " for " + '@ViewData["NameOfStore"]'; //to display one on credit card and the second for final
+        creditOnCard += "$";
+        $("#CreditOnCard").text(creditOnCard);
+        $("#credit").val(Credit.toString());
+
+    });
+        $("#Email,#FirstName,#LastName,#Credit").focusout(function () {
+            console.log("focusout");
+            uploadToEmail();
+        });
+
+    function  uploadToEmail() {
+        console.log("focus");
+        var _canvas = $('canvas').get();
+
+        if (_canvas.length > 0) {
+            console.log("canvas has remove");
+            $('canvas').remove();
+
+        }
+        var scrollPos;//pos of win
+        scrollPos = document.body.scrollTop;
+
+        html2canvas([document.getElementById('card')], {
+            onrendered: function (canvas) {
+               
+                document.body.appendChild(canvas);
+               // dont jump stay where you are 
+                window.scrollTo(0, scrollPos);
+
+                $('canvas').css('display', 'none');
+
+                $('canvas').attr('id', 'ImgGiftCard');
+
+                var image = document.getElementById("ImgGiftCard").toDataURL("image/png");
+                image = image.replace('data:image/png;base64,', '');
+                $("#imageDataCard").val(image);
+                console.log("canvas has create");                              
+            },
+        });      
+    };
+
+    $("#file_btn").change(function () {
+        alert("File successfully uploaded");
+    });  
+    });
+</script>
+<style>
+    #h2Greeting {
+        text-align: center;
+        color: red;
+        font-weight: bold;
+        font-family: Papyrus, fantasy;
+        text-decoration: underline;
+    }
+
+    .file_Btn {
+        font-weight: 800;
+        font-size: large;
+        text-align: center;
+        cursor: hand;
+    }
+
+    #file_btn {
+        display: none;
+    }
+</style>

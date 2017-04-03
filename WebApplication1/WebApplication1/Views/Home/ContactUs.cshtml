@@ -1,0 +1,152 @@
+﻿@{
+    ViewBag.Title = "ContactUs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="contact" class="container text-center">
+    <div class="container" >
+        <div class="section-title center" id="firstToggelFromHer">
+            <h2><strong>Contact</strong> us</h2>
+            <hr>
+
+        </div>
+        <div class="col-md-8 col-md-offset-2" id="secondeToggelFromHer">
+            <div class="col-md-4">
+                <i class="fa fa-map-marker fa-2x"></i>
+                <p>
+                    123 Candy Land Street<br>
+                    Bnei Brak, Israel
+                </p>
+            </div>
+            <div class="col-md-4">
+                <i class="fa fa-envelope-o fa-2x"></i>
+                <p>electronic.gift.card@gmail.com</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fa fa-phone fa-2x"></i>
+                <p> +1 800 123 1234</p>
+            </div>
+            <hr>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-md-8 col-md-offset-2" id="tirthToggelFromHer">
+            <hr>
+            <h3>Leave us a message</h3>
+            @using (Ajax.BeginForm("ContactUs", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "result" }, new { @id = "contactForm" }))
+            {               
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" id="name" class="form-control" name="nameToContact" placeholder="Name" required="required">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="email" id="email" class="form-control" name="emailToContact" placeholder="Email" required="required">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea name="messageToContact" id="message" class="form-control" rows="4" placeholder="Message" required=""></textarea>
+                    <p class="help-block text-danger"></p>
+                </div>
+                <button id="sendToContact" type="submit" class="btn btn-default" style="border:none">Send Message</button>            
+            }
+
+        </div>
+    </div>
+    <div class="col-lg-12 text-center">
+        <p class="label" id="result" style="color:red;"></p>       
+    </div>
+    
+</div>
+<script>
+    $(document).ready(function () {
+        var form = $("#contactForm");
+        $("#sendToContact").click(function () {
+            if (form.valid()) {
+                $("#startToggelFromHer,#secondeToggelFromHer,#tirthToggelFromHer").toggle();
+            }
+        });
+    });
+</script>
+<style>
+    #contact {
+        border-radius: 50px;
+        /*padding: 80px 0;*/
+        background: #ffffff;
+    }
+
+        #contact h3 {
+            color: #ff0000;
+            font-size: 20px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        #contact form {
+            padding: 30px 0;
+        }
+
+        #contact .fa {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+
+        #contact .text-danger {
+            color: #ff3333;
+            text-align: left;
+        }
+        #contact .form-control {
+            display: block;
+            width: 100%;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            -webkit-transition: none;
+            -o-transition: none;
+            transition: none;
+        }
+
+            #contact .form-control:focus {
+                border-color: inherit;
+                outline: 0;
+                -webkit-box-shadow: transparent;
+                box-shadow: transparent;
+            }
+
+        #contact .btn {
+            background-color: #aaa;
+            border: 0;
+            border-radius: 4px;
+            padding: 10px 20px;
+            color: #ffffff;
+            margin-top: 15px;
+        }
+
+            #contact .btn:hover, #contact .btn:focus {
+                background: #ff0000;
+            }
+    .section-title.center hr {
+        height: 4px;
+        width: 70px;
+        text-align: center;
+        position: relative;
+        background: #ff0000;
+        margin: 0 auto;
+        margin-bottom: 30px;
+        border: 0;
+    }
+</style>
+
+<script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>

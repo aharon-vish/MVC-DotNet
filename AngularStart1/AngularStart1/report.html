@@ -1,0 +1,160 @@
+﻿<link href="Content/owl.carousel.css" rel="stylesheet" />
+<link href="Content/owl.theme.css" rel="stylesheet" />
+<script src="Scripts/owl.carousel.js"></script>
+<script src="https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js" type="text/javascript"></script>
+
+
+<div ng-controller="reportController">
+    <form class="reporAnnual" method="post" role="form">
+        <div class="buttonsR">
+            <a class="btnR blue" id="btn" ng-click="annualReport()">Annual Report</a>
+            <a class="btnR purple" id="btn" ng-click="monthlyReport()">Monthly Report</a>
+        </div>
+
+    </form>
+    <div ng-show="ShowannualReport">
+        <div google-chart chart="chartObject" id='printAnnual' class="reporAnnual" style="height:200px; width:100%;border-radius:50px"></div>
+        <div class="buttonsR">
+            <a class="btnR yellow" ng-click="printAnnual()"><span class="glyphicon glyphicon-print" aria-hidden="true"></span></a>
+            <a class="btnR green" ng-click="exportDataAnnual()"><i class="fa fa-file-excel-o"></i></a>
+        </div>
+    </div>
+    <div ng-show="showMonthlyReport">      
+        <div id="owl-demo" class="owl-carousel owl-theme">
+            <div google-chart chart="Nowyear" id='printAnnualA' class="item" style="height:100%; width:100%;border-radius:50px"></div>
+            <div google-chart chart="Lastyear" id='printAnnualB' class="item" style="height:100%; width:100%;border-radius:50px"></div>
+            <div google-chart chart="LastLastyear" id='printAnnualC' class="item" style="height:100%; width:100%;border-radius:50px"></div>
+        </div>
+        <div class="buttonsR">
+            <a class="btnR yellow" ng-click="print()"><span class="glyphicon glyphicon-print" aria-hidden="true"></span></a>
+            <a class="btnR green" ng-click="exportDataMonthly()"><i class="fa fa-file-excel-o"></i></a>
+        </div>
+
+    </div>
+    
+
+<!--start Excel section-->
+    <!--start Excel Annual-->
+    <div id="exportableAnnual">
+        <table style="width:100%;display:none">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>How Many bought? </th>
+                    <th>How Many use ?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{annualReportParm.YearA }}</td>
+                    <td>{{annualReportParm.CountA}}</td>
+                    <td>{{annualReportParm.UsegA}}</td>
+                </tr>
+                <tr>
+                    <td>{{annualReportParm.YearB }}</td>
+                    <td>{{annualReportParm.CountB}}</td>
+                    <td>{{annualReportParm.UsegB}}</td>
+                </tr>
+                <tr>
+                    <td>{{annualReportParm.YearC }}</td>
+                    <td>{{annualReportParm.CountC}}</td>
+                    <td>{{annualReportParm.UsegC}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="exportableAnnual">
+        <table style="width:100%;display:none">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>How Many bought? </th>
+                    <th>How Many use ?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{annualReportParm.YearA }}</td>
+                    <td>{{annualReportParm.CountA}}</td>
+                    <td>{{annualReportParm.UsegA}}</td>
+                </tr>
+                <tr>
+                    <td>{{annualReportParm.YearB }}</td>
+                    <td>{{annualReportParm.CountB}}</td>
+                    <td>{{annualReportParm.UsegB}}</td>
+                </tr>
+                <tr>
+                    <td>{{annualReportParm.YearC }}</td>
+                    <td>{{annualReportParm.CountC}}</td>
+                    <td>{{annualReportParm.UsegC}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--start Excel Monthly-->
+    <div id="exportableMonthly">
+        <table style="width:100%;display:none">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Jan</th>
+                    <th>Feb</th>
+                    <th>March</th>
+                    <th>April</th>
+                    <th>May</th>
+                    <th>June</th>
+                    <th>July</th>
+                    <th>Aug</th>
+                    <th>Sept</th>
+                    <th>Oct</th>
+                    <th>Nov</th>
+                    <th>Dec</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font:bold;text-align:center">2015</td>
+                    <td style="text-align:center;background-color:lightblue" ng-repeat="item in yearABuy track by $index ">bought {{item}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="text-align:center;background-color:lightblue" ng-repeat="item in yearAUse track by $index ">use {{item}}</td>
+                </tr>
+                <tr>
+                    <td style="font:bold;text-align:center">2014</td>
+                    <td style="text-align:center;background-color:lightcoral" ng-repeat="item in yearBBuy track by $index ">bought {{item}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="text-align:center;background-color:lightcoral" ng-repeat="item in yearBUse track by $index ">use {{item}}</td>
+                </tr>
+                <tr>
+                    <td style="font:bold;text-align:center">2013</td>
+                    <td style="text-align:center;background-color:lightgreen" ng-repeat="item in yearCBuy track by $index ">bought {{item}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="text-align:center;background-color:lightgreen" ng-repeat="item in yearCUse track by $index ">use {{item}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--End Excel section-->
+</div>
+
+
+<!--Carousel plugin report-->
+<script>
+    $(document).ready(function () {
+        var i = 0;
+        var owl = $("#owl-demo");
+        owl.owlCarousel({
+            navigation: true, // Show next and prev buttons
+            slideSpeed: 300,
+            paginationSpeed: 400,
+            singleItem: true,         
+        }); 
+    });
+</script>

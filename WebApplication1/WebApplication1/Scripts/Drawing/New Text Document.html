@@ -1,0 +1,198 @@
+<html lang="en"><head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Drawingboard.js: a simple canvas based drawing app that you can integrate easily on your website.</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+
+		<link rel="stylesheet" href="example/prism.css">
+		<link rel="stylesheet" href="example/website.css">
+
+
+		<!-- in a production environment, you can include the minified css. It contains the css of the board and the default controls (size, nav, colors):
+		<link rel="stylesheet" href="dist/drawingboard.min.css"> -->
+		<link rel="stylesheet" href="css/drawingboard.css">
+
+		<style>
+		/*
+		* drawingboards styles: set the board dimensions you want with CSS
+		*/
+
+		.board {
+			margin: 0 auto;
+			width: 300px;
+			height: 300px;
+		}
+
+		#default-board {
+			width: 700px;
+			height: 400px;
+		}
+
+
+		</style>
+	</head>
+	<body>
+		
+
+		<noscript>JavaScript is required :(</noscript>
+
+
+		
+			<span class="token punctuation">(</span><span class="token string">'title-board'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+	controls<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+	background<span class="token punctuation">:</span> <span class="token string">'example/drawingboardjs.png'</span><span class="token punctuation">,</span>
+	color<span class="token punctuation">:</span> <span class="token string">'#ff0'</span><span class="token punctuation">,</span>
+	webStorage<span class="token punctuation">:</span> <span class="token boolean">false</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+
+			
+
+			<div class="example" data-example="1">
+				<h1>The default DrawingBoard</h1>
+				<div class="board drawing-board" id="default-board"><div class="drawing-board-control drawing-board-control-drawingmode"></div><div class="drawing-board-control-inner" title="1"><input type="range" min="1" max="50" value="1" step="1" class="drawing-board-control-size-range-input"><span class="drawing-board-control-size-range-current" style="width: 1px; height: 1px; border-radius: 1px; margin-left: -0.5px; margin-top: -0.5px;"></span></div></div></div></div><div class="drawing-board-canvas-wrapper" style="width: 698px; height: 365px;"><canvas class="drawing-board-canvas" width="698" height="365" style="width: 698px; height: 365px;"></canvas><div class="drawing-board-cursor drawing-board-utils-hidden"></div></div></div>
+			
+			
+
+	
+				
+			</div>
+
+
+		</div>
+
+		<!-- jquery is required - zepto might do the trick too -->
+		<script async="" src="//www.google-analytics.com/analytics.js"></script><script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+		<!-- in a production environment, just include the minified script. It contains the board and the default controls (size, nav, colors, download): -->
+		<!--<script src="../dist/drawingboard.min.js"></script>-->
+
+		<script src="js/drawingboard.js"></script>
+		<script src="js/board.js"></script>
+		<script src="js/controls/control.js"></script>
+		<script src="js/controls/color.js"></script>
+		<script src="js/controls/drawingmode.js"></script>
+		<script src="js/controls/navigation.js"></script>
+		<script src="js/controls/size.js"></script>
+		<script src="js/controls/download.js"></script>
+		<script src="js/utils.js"></script>
+
+
+
+		<script>
+			//create the drawingboard by passing it the #id of the wanted container
+			var defaultBoard = new DrawingBoard.Board('default-board');
+		</script>
+
+
+
+		<!-- an input[type=range] poyfill is more than recommanded if you want to use the default "size" control with the "range" type *on every browser*
+			the polyfill is loaded only if necessary via yepnope http://yepnopejs.com/
+
+			note this is totally not required if the size control is set to "auto" or "dropdown" - the control will work with every browser with an alternate view -->
+		<script src="example/yepnope.js"></script>
+		<script>
+			var iHasRangeInput = function() {
+				var inputElem  = document.createElement('input'),
+					smile = ':)',
+					docElement = document.documentElement,
+					inputElemType = 'range',
+					available;
+				inputElem.setAttribute('type', inputElemType);
+				available = inputElem.type !== 'text';
+				inputElem.value         = smile;
+				inputElem.style.cssText = 'position:absolute;visibility:hidden;';
+				if ( /^range$/.test(inputElemType) && inputElem.style.WebkitAppearance !== undefined ) {
+					docElement.appendChild(inputElem);
+					defaultView = document.defaultView;
+					available = defaultView.getComputedStyle &&
+						defaultView.getComputedStyle(inputElem, null).WebkitAppearance !== 'textfield' &&
+						(inputElem.offsetHeight !== 0);
+					docElement.removeChild(inputElem);
+				}
+				return !!available;
+			};
+
+			yepnope({
+				test : iHasRangeInput(),
+				nope : ['example/fd-slider.min.css', 'example/fd-slider.min.js'],
+				callback: function(id, testResult) {
+					if("fdSlider" in window && typeof (fdSlider.onDomReady) != "undefined") {
+						try { fdSlider.onDomReady(); } catch(err) {}
+					}
+				}
+			});
+		</script>
+
+		<script data-example="2">
+			//pass options and add custom controls to a board
+			var customBoard = new DrawingBoard.Board('custom-board', {
+				background: "#ff7ffe",
+				color: "#ff0",
+				size: 30,
+				controls: [
+					{ Size: { type: "range" } },
+					{ Navigation: { back: false, forward: false } },
+					'DrawingMode'
+				],
+				webStorage: 'local'
+			});
+
+			//There are multiple ways to add a control to a board after its initialization:
+			customBoard.addControl('Download'); //if the DrawingBoard.Control.Download class exists
+
+			//or...
+			//var downloadControl = new DrawingBoard.Control.Download(customBoard).addToBoard();
+
+			//or...
+			//var downloadControl = new DrawingBoard.Control.Download(customBoard);
+			//customBoard.addControl(downloadControl);
+		</script>
+
+		<script data-example="3">
+			var customBoard2 = new DrawingBoard.Board('custom-board-2', {
+				controls: [
+					'Color',
+					{ Size: { type: 'dropdown' } },
+					{ DrawingMode: { filler: false } },
+					'Navigation',
+					'Download'
+				],
+				size: 1,
+				webStorage: 'session',
+				enlargeYourContainer: true
+			});
+		</script>
+
+		<script data-example="4">
+			var simpleBoard = new DrawingBoard.Board('simple-board', {
+				controls: false,
+				webStorage: false
+			});
+		</script>
+
+		<script data-example="5">
+			var imageBoard = new DrawingBoard.Board('title-board', {
+				controls: false,
+				background: 'example/drawingboardjs.png',
+				color: '#ff0',
+				webStorage: false
+			});
+		</script>
+
+		<!-- totally not drawingboard-related code -->
+		<script src="example/prism.js"></script>
+		<script src="example/script.js"></script>
+		<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-13184829-7', 'leimi.github.io');
+  ga('send', 'pageview');
+
+</script>
+	
+
+</body></html>

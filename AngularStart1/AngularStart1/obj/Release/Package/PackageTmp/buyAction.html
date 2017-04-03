@@ -1,0 +1,75 @@
+﻿<div class="modal-header">
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <div>
+        <h2 style=" text-align:center;font-family:'lobster', cursive;display:inline">
+            {{nameGiftCard.LastName}}
+        </h2>
+        <h2 style="text-align:center;font-family:'Lobster', cursive;color:red;display: inline">
+         {{nameGiftCard.FirstName}}
+        </h2>
+    </div>
+</div>
+<div class="modal-body">
+    <div class ="form-group" style="width:50%;display:inline-block;float:left">
+        <label> Email:</label>
+        {{nameGiftCard.Email}}
+        <br />
+        <label> Valid Date:</label>
+        {{nameGiftCard.GiftCardValid}}
+        <br />
+        <label> Credit:</label>
+        {{nameGiftCard.Credit}}$
+        <br />
+        <br />
+        <label for="sel1">Select Sku:</label>
+        <select class="form-control" ng-model="selectedItem"
+                ng-options="item as item.skuNumber for item in items"
+                style="width:30%"></select>
+        <br />
+        <br />
+    </div>
+    <div class="form-group" ng-show="selectedItem!=null" style=" border-radius:1px;box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.3);width:50%;display:inline-block">
+        <div>
+            <div style="padding-left:1%"><label>Item:</label>{{selectedItem.itemDescription}}</div>
+            <div style="padding-left:1%"><label>Size:</label>{{selectedItem.size}} </div>
+            <div style="padding-left:1%"><label>price:</label>{{selectedItem.price}}$</div>
+            <div style="float:right;padding-bottom:1%;padding-right:1%">
+                <button class="btn btn-primary " ng-click="addItem(selectedItem)">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true">
+                    </span>Add item
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<br />
+<br />
+<div class="modal-footer" style="text-align: left;">
+    <div>
+        <ol>
+            <li ng-repeat="item in listItems track by $id($index)" style="float:left;height:25px;width:100%">
+                {{item.itemDescription}}
+                <a ng-click="deleteItem($index)" class="btn btn-circle-micro btn-danger" style="float:right">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </li>
+            
+        </ol>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success center-block" ng-click="ok()">OK</button>
+</div>
+<style>
+    .btn-circle-micro {
+  width: 19px;
+  height: 19px;
+  text-align: center;
+  padding: 1px 0;
+  font-size: 13px;
+  line-height: 0.1;
+  border-radius: 30px;
+}
+
+</style>
